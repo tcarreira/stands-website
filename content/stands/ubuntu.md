@@ -165,6 +165,12 @@ showcase: |
     a:visited {
       color: #772953;
     }
+    @media (max-width:767px) {
+      .list-group-horizontal {
+        -ms-flex-direction: column;
+        flex-direction: column;
+      }
+    }
   </style>
 
   <script>
