@@ -1,0 +1,40 @@
+name: Publish to Github Pages
+
+on:
+  # schedule:
+  #   # Every Friday at 1:00 (AM) UTC
+  #   - cron:  '0 1 * * 5'
+  push:
+    branches:
+      - master
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          submodules: false
+          fetch-depth: 0
+
+      - name: Update and checkout Ubuntu submodules
+        run: |
+          git submodule update --init --recursive --remote content/stands/ubuntu
+          git submodule update --init --recursive --remote static/stands/ubuntu
+
+      - name: Setup Hugo
+        uses: peaceiris/actions-hugo@v2
+        with:
+          hugo-version: "0.74.3"
+          extended: true
+
+      - name: Build
+        run: |
+          hugo --gc --minify --cleanDestinationDir --baseURL="https://fosdem-stands-website.carreira.pw/"
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          keep_files: true
