@@ -10,4 +10,5 @@ show_on_overview: true
 website: https://ubuntu.com/
 chatroom: ubuntu
 draft: true
+invalid yaml
 ---
