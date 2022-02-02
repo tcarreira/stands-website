@@ -9,5 +9,5 @@ title: Ubuntu
 show_on_overview: true
 website: https://ubuntu.com/
 chatroom: ubuntu
-draft: true
+draft: false
 ---
